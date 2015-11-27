@@ -1,0 +1,181 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="graph.aspx.cs" Inherits="graph" %>
+
+<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <div>
+<table style="width:100%; height: 457px;"><tr><td align="center" 
+        style="height: 532px">
+<table border="0" cellpadding="0" cellspacing="0" style="border:solid 1px  #000; height: 221px; width:900px" 
+        bgcolor="White">
+<tr><td style="height: 46px" colspan="3" bgcolor="#006699" align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <asp:Label ID="Label4" runat="server" Font-Size="Large" Font-Bold="True" 
+        Text="SEARCH RECORDS" ForeColor="White" ></asp:Label></td></tr>
+    <tr><td colspan="3" height="35px"></td></tr>
+     <tr><td style="width: 248px; height: 47px;" width="15px"></td><td align="center" 
+            style="height: 47px">
+         &nbsp;</td><td align="left" style="height: 47px">
+             <br />
+             &nbsp;&nbsp;&nbsp;</td></tr>
+<tr><td style="width: 248px; height: 34px;" height="10px" width="15px"></td>
+    <td style="width: 275px; height: 34px;" align="center">
+    <asp:Label ID="Label22" runat="server" Text="Select Year" Height="19px" Width="123px" 
+            Font-Size="Medium"></asp:Label>
+    </td>
+    <td style="width: 366px; height: 34px;" align="left" valign="baseline">
+        <asp:DropDownList ID="DropDownList1" runat="server" Height="24px" 
+            style="margin-bottom: 14px" Width="248px" AppendDataBoundItems="true" 
+            AutoPostBack="True">
+        <asp:ListItem>Select Year</asp:ListItem>
+        </asp:DropDownList>
+    </td></tr>
+
+<tr><td style="width: 248px; height: 34px;" height="10px" width="15px"></td>
+    <td style="width: 275px; height: 34px;" align="center">
+    <asp:Label ID="Label1" runat="server" Text="Enter Name" Height="19px" Width="123px" 
+            Font-Size="Medium"></asp:Label>
+    </td>
+    <td style="width: 366px; height: 34px;" align="left" valign="baseline">
+        <asp:TextBox ID="txtTitle" runat="server" Height="24px" 
+            style="margin-bottom: 14px" Width="248px" BorderStyle="Groove" 
+            BackColor="White"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+            ControlToValidate="txtTitle" ErrorMessage="Please Enter the Name" ForeColor="Red" 
+            ValidationGroup="a">*</asp:RequiredFieldValidator>
+    </td></tr>
+
+            <tr><td style="width: 248px; height: 34px;" height="10px" width="15px"></td>
+    <td style="width: 275px; height: 34px;" align="center">
+    <asp:Label ID="Label7" runat="server" Text="Select Gender" Height="19px" Width="123px" 
+            Font-Size="Medium"></asp:Label>
+    </td>
+    <td style="width: 366px; height: 34px;" align="left" valign="baseline">
+        <asp:DropDownList ID="DropDownList2" runat="server" Height="24px" style="margin-bottom: 14px" Width="248px" AppendDataBoundItems="true" AutoPostBack="true">
+        <asp:ListItem>Select Gender</asp:ListItem>
+        <asp:ListItem>Male</asp:ListItem>
+        <asp:ListItem>Female</asp:ListItem>
+        </asp:DropDownList>
+    </td></tr>
+
+   
+<tr><td style="height: 39px;" colspan="3" align="center">
+        <asp:Button ID="btnsave" runat="server" Height="26px" onclick="btnsave_Click1" 
+            Text="SEARCH" Width="110px" />
+        &nbsp;&nbsp;
+       
+        <asp:Button ID="btncancel" runat="server" Height="26px" Text="RESET" Width="110px" 
+            onclick="btnclose_Click" />
+    </td>
+    </tr>
+<tr><td style="width: 248px; height: 1px;"></td>
+    <td style="width: 275px; height: 1px;"></td>
+    <td style="width: 366px; height: 1px;"></td></tr>
+    <tr><td colspan="3">
+    <div>
+    
+        <asp:Chart ID="Chart1" runat="server" ToolTip="Graphical Presentation of Records">
+       
+            <Series>
+                <asp:Series Name="Series1">
+                </asp:Series>
+            </Series>
+            <ChartAreas>
+                <asp:ChartArea Name="ChartArea1">
+                </asp:ChartArea>
+            </ChartAreas>
+             
+        
+        </asp:Chart>
+        <div>
+        <span style="font-style:normal; color:Red; font-size:large; text-align:center; margin-left:60px;">
+            <asp:Label ID="Label2" runat="server" Text="Graphical Representation of Names Popularity Year-Wise(X-axis Years & Y-axis Popularity Rank)"></asp:Label></span>
+        </div>
+    </div>
+    </td></tr>
+    <tr>
+    <td>
+    &nbsp;
+    </td>
+    
+    </tr>
+    <tr>
+    <td>
+    &nbsp;
+    </td>
+    
+    </tr>
+<tr><td colspan="3" align="center">
+        <asp:GridView ID="GridViewJob" runat="server" CellPadding="3" BorderWidth="2px"
+             AutoGenerateColumns="False"  style="margin-bottom: 42"
+             BackColor="White" 
+            BorderColor="White" BorderStyle="Ridge" height="50px"
+            Width="750px" CellSpacing="1" GridLines="None">
+             <EmptyDataTemplate>
+              There is no data in the Record Section
+             </EmptyDataTemplate>
+            <Columns>
+            <asp:TemplateField HeaderText="Name" HeaderStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center"  HeaderStyle-VerticalAlign="Middle">
+            <ItemTemplate>
+             <div style="text-align:center;">
+            <asp:Label ID="lbltitle" runat="server" Text='<%#Eval("name") %>'></asp:Label>
+            </div>
+            </ItemTemplate>
+
+<HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Font-Bold="True"></HeaderStyle>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="Number Of Births" HeaderStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center"  HeaderStyle-VerticalAlign="Middle">
+            <ItemTemplate>
+             <div style="text-align:center;">
+            <asp:Label ID="lblcat" runat="server" Text='<%#Eval("numbers") %>'></asp:Label>
+           
+           </div> </ItemTemplate>
+
+<HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Font-Bold="True"></HeaderStyle>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Name Popularity Rank" HeaderStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center"  HeaderStyle-VerticalAlign="Middle">
+            <ItemTemplate>
+            <div style="text-align:center;"> <asp:Label ID="lbldes" runat="server" Text='<%#Eval("popularityrank") %>'></asp:Label>
+            </div></ItemTemplate>
+
+<HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Font-Bold="True"></HeaderStyle>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Gender"  HeaderStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center"  HeaderStyle-VerticalAlign="Middle" >
+            <ItemTemplate>
+           <div style="text-align:center;"> <asp:Label ID="lbldescription1" runat="server" Text='<%#Eval("gender") %>'></asp:Label>
+           </div> </ItemTemplate>
+
+<HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Font-Bold="True" ></HeaderStyle>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Year Of Birth"  HeaderStyle-Font-Bold="true" HeaderStyle-HorizontalAlign="Center"  HeaderStyle-VerticalAlign="Middle" >
+            <ItemTemplate>
+           <div style="text-align:center;"> <asp:Label ID="lbldescription2" runat="server" Text='<%#Eval("year") %>'></asp:Label>
+           </div> </ItemTemplate>
+
+<HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Font-Bold="True" ></HeaderStyle>
+            </asp:TemplateField>
+            
+            </Columns>
+            <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+            <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+            <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+            <RowStyle ForeColor="Black" BackColor="#DEDFDE" />
+            <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+            <SortedAscendingHeaderStyle BackColor="#594B9C" />
+            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+            <SortedDescendingHeaderStyle BackColor="#33276A" />
+        </asp:GridView>
+    </td>
+    </tr>
+    
+        <tr><td height="30px"></td><td></td><td></td></tr>
+    </table></td></tr>
+</table>
+</div>
+</asp:Content>
+
+
+
